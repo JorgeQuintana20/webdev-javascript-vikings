@@ -74,37 +74,53 @@ class War {
         
 
         //removing saxon
-        this.saxonArmy.forEach( (eachSax, i) =>{
-            if(eachSax.health <= 0) {
-                this.saxonArmy.splice(i, 1);
-            }
-        })
-
-        return 
+        if (randomSaxon.health <= 0) {
+        this.saxonArmy.splice(this.saxonArmy.indexOf(randomSaxon), 1);
+        }
+        if (randomSaxon.health > 0) {
+            return `A Saxon has received ${randomViking.strength} points of damage`;
+        }
+        else if (randomSaxon.health <= 0) {
+            return `A Saxon has died in combat`;
+        }
 
     }
 
     saxonAttack() {
         // random saxon
        let randomSaxNum = Math.floor(Math.random() * this.saxonArmy.length);
-       let randomSaxon = this.saxonArmy[randomSaxNum];
+        let randomSaxon = this.saxonArmy[randomSaxNum];
 
-       // random viking
-       let randomVikNum = Math.floor(Math.random() * this.vikingArmy.length)
-       let randomViking = this.vikingArmy[randomVikNum]
+        // random viking
+        let randomVikNum = Math.floor(Math.random() * this.vikingArmy.length)
+        let randomViking = this.vikingArmy[randomVikNum]
 
-       //Attack
-       randomViking.receiveDamage(randomSaxon.attack())
+        //Attack
+        randomViking.receiveDamage(randomSaxon.attack())
+        
+
+        //removing saxon
+        if (randomViking.health <= 0) {
+        this.vikingArmy.splice(this.vikingArmy.indexOf(randomViking), 1);
+        }
+        if (randomViking.health > 0) {
+            return `Harald has received ${randomSaxon.strength} points of damage`;
+        }
+        else if (randomViking.health <= 0) {
+            return `A Viking has died in combat`;
+        }
+
     }
-//     showStatus() {
-//          if(this.saxonArmy.length === 0) {
-//              return `Vikings have won the war of the century!`
-//          }
-//          else if(this.vikingArmy.length === 0) {
-//              return `Saxons have fought for their lives and survive another day...`
-//          }
-//          else(this.vikingArmy.length >= 1 && this.saxonArmy.length >= 1) {
-//              return `Vikings and Saxons are still in the thick of battle.`
-//          }
-//     }
+
+    showStatus() {
+         if(this.saxonArmy.length === 0) {
+             return `Vikings have won the war of the century!`
+         }
+         else if(this.vikingArmy.length === 0) {
+             return `Saxons have fought for their lives and survive another day...`
+         }
+         else(this.vikingArmy.length >= 1 && this.saxonArmy.length >= 1); {
+             return `Vikings and Saxons are still in the thick of battle.`
+         }
+    }
 }
